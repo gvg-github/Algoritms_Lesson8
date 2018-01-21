@@ -30,42 +30,89 @@ public class MainClass {
         }
 
         //Сортировка подсчетом.
-        Task1(arr100, arr1000, arr1000000);
+        task1(arr100, arr1000, arr1000000);
 
         //Быстрая сортировка.
-        Task2(arr100, arr1000, arr1000000);
+        task2(arr100, arr1000, arr1000000);
     }
 
     //Быстрая сортировка.
-    private static void Task2(int[] a1, int[] a2, int[] a3) {
-
-    }
-
-    //Сортировка подсчетом.
-    private static void Task1(int[] a1, int[] a2, int[] a3) {
-
+    private static void task2(int[] a1, int[] a2, int[] a3) {
+        System.out.println("Quick sort:");
         long start = System.currentTimeMillis();
-        CountSort(a1);
+        quickSort(a1, 0, a1.length - 1);
         long end = System.currentTimeMillis();
-        System.out.println(Arrays.toString(a1));
         long sortTime = end - start;
-        System.out.println(sortTime);
+        System.out.println(Arrays.toString(a1));
+        System.out.printf("%012d \n", sortTime);
 
         start = System.currentTimeMillis();
-        CountSort(a2);
+        quickSort(a2, 0, a2.length - 1);
         end = System.currentTimeMillis();
 //        System.out.println(Arrays.toString(a2));
         sortTime = end - start;
-        System.out.println(sortTime);
+        System.out.printf("%012d \n", sortTime);
 
         start = System.currentTimeMillis();
-        CountSort(a3);
+        quickSort(a3, 0, a3.length - 1);
         end = System.currentTimeMillis();
         sortTime = end - start;
-        System.out.println(sortTime);
+        System.out.printf("%012d \n", sortTime);
     }
 
-    private static void CountSort(int[] arr) {
+    //Быстрая сортировка.
+    private static void quickSort(int[] arr, int first, int last) {
+
+        int i = first;
+        int j = last;
+        int x = arr[(first + last) / 2];
+        do {
+            while (arr[i] < x) i++;
+            while (arr[j] > x) j--;
+            if (i <= j) {
+                if (arr[i] > arr[j]) {
+                    int y = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = y;
+                }
+                i++;
+                j--;
+            }
+        } while (i <= j);
+        if (i < last) {
+            quickSort(arr, i, last);
+        }
+        if (first < j) {
+            quickSort(arr, first, j);
+        }
+    }
+
+    //Сортировка подсчетом.
+    private static void task1(int[] a1, int[] a2, int[] a3) {
+        System.out.println("Count sort:");
+        long start = System.currentTimeMillis();
+        countSort(a1);
+        long end = System.currentTimeMillis();
+        System.out.println(Arrays.toString(a1));
+        long sortTime = end - start;
+        System.out.printf("%012d \n", sortTime);
+
+        start = System.currentTimeMillis();
+        countSort(a2);
+        end = System.currentTimeMillis();
+//        System.out.println(Arrays.toString(a2));
+        sortTime = end - start;
+        System.out.printf("%012d \n", sortTime);
+
+        start = System.currentTimeMillis();
+        countSort(a3);
+        end = System.currentTimeMillis();
+        sortTime = end - start;
+        System.out.printf("%012d \n", sortTime);
+    }
+
+    //Сортировка подсчетом.
+    private static void countSort(int[] arr) {
         int[] c = new int[k];
         for (int i = 0; i < arr.length; i++) {
             c[arr[i]]++;
