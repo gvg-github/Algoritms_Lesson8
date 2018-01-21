@@ -28,12 +28,15 @@ public class MainClass {
             if (i < a2) arr1000[i] = x;
             arr1000000[i] = x;
         }
+        int[] arr100q = Arrays.copyOf(arr100, arr100.length);
+        int[] arr1000q = Arrays.copyOf(arr100, arr1000.length);
+        int[] arr1000000q = Arrays.copyOf(arr100, arr1000000.length);
 
         //Сортировка подсчетом.
         task1(arr100, arr1000, arr1000000);
 
         //Быстрая сортировка.
-        task2(arr100, arr1000, arr1000000);
+        task2(arr100q, arr1000q, arr1000000q);
     }
 
     //Быстрая сортировка.
